@@ -1,15 +1,15 @@
 /// Copyright (c) 2021 Razeware LLC
-/// 
+///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-/// 
+///
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
 /// frameworks are governed by their own individual licenses.
@@ -30,8 +30,8 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
 import AVKit
+import SwiftUI
 
 struct PlayerView: View {
   let episode: Episode
@@ -42,14 +42,17 @@ struct PlayerView: View {
     return (width - 20.0) * 9.0 / 16.0
   }
 
+  @State private var bgColor =
+    Color(.sRGB, red: 0.98, green: 0.9, blue: 0.2)
+
+  
   var body: some View {
     if let url = URL(string: episode.videoURLString) {
       GeometryReader { proxy in
         VStack {
           VideoPlayer(player: AVPlayer(url: url))
-            .frame(
-              maxHeight: vSizeClass == .regular ?
-                height9(to16: proxy.size.width) : .infinity)
+            .frame(maxHeight: vSizeClass == .regular ?
+                    height9(to16: proxy.size.width) : .infinity)
             .padding(15)
             .roundedGradientBackground()
 
@@ -95,11 +98,9 @@ extension View {
   func roundedGradientBackground() -> some View {
     self
       .background(
-        LinearGradient(
-          gradient: Gradient(
-            colors: [Color.gradientDark, Color.gradientLight]),
-          startPoint: .leading,
-          endPoint: .trailing)
+        LinearGradient(gradient: Gradient(colors: [Color.gradientDark, Color.gradientLight]),
+                       startPoint: .leading,
+                       endPoint: .trailing)
       )
       .cornerRadius(15, corners: [.bottomLeft, .bottomRight])
   }
