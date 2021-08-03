@@ -48,12 +48,6 @@ struct ContentView: View {
   }
 
   init() {
-//    UITableViewCell.appearance().selectedBackgroundView = {
-//      let view = UIView()
-//      view.backgroundColor = .blue
-//      return view
-//    }()
-
     let appearance = UINavigationBarAppearance()
     appearance.backgroundColor = UIColor(named: "top-bkgd")
     appearance.largeTitleTextAttributes = [
@@ -65,7 +59,7 @@ struct ContentView: View {
     ]
     // 굳이 필요엄따. appearance.titlePositionAdjustment = .init(horizontal: 100, vertical: 0)
 
-    UINavigationBar.appearance().tintColor = .white
+    UINavigationBar.appearance().tintColor = .white // .yellow
 
     // 이 설정을 안하면 아무 의미없다.
     UINavigationBar.appearance().standardAppearance = appearance
