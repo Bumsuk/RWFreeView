@@ -34,74 +34,77 @@ import AVKit
 import SwiftUI
 
 struct PlayerView: View {
-  let episode: Episode
-  @State private var showPlayer = false
-  @Environment(\.verticalSizeClass) var vSizeClass
+    let episode: Episode
+    @State private var showPlayer = false
+    @Environment(\.verticalSizeClass) var vSizeClass
 
-  private func height9(to16 width: CGFloat) -> CGFloat {
-    return (width - 20.0) * 9.0 / 16.0
-  }
-
-  @State private var bgColor =
-    Color(.sRGB, red: 0.98, green: 0.9, blue: 0.2)
-
-  
-  var body: some View {
-    if let url = URL(string: episode.videoURLString) {
-      GeometryReader { proxy in
-        VStack {
-          VideoPlayer(player: AVPlayer(url: url))
-            .frame(maxHeight: vSizeClass == .regular ?
-                    height9(to16: proxy.size.width) : .infinity)
-            .padding(15)
-            .roundedGradientBackground()
-
-          // Show video info in iPad or iPhone portrait orientation
-          if vSizeClass == .regular {
-            VStack(spacing: 16) {
-              Text(episode.name)
-                .font(.title)
-                .fontWeight(.bold)
-                .foregroundColor(Color(UIColor.label))
-              HStack(spacing: 15) {
-                Text(episode.released)
-                Text(episode.domain)
-                Text(String(episode.difficulty).capitalized)
-              }
-              Text(episode.description)
-                .padding(.horizontal)
-            }
-            .foregroundColor(Color(UIColor.systemGray))
-          }
-          Spacer()
-        }
-      }
+    private func height9(to16 width: CGFloat) -> CGFloat {
+        return (width - 20.0) * 9.0 / 16.0
     }
-  }
+
+    @State private var bgColor =
+        Color(.sRGB, red: 0.98, green: 0.9, blue: 0.2)
+
+    var body: some View {
+        if let url = URL(string: episode.videoURLString) {
+            GeometryReader { proxy in
+                VStack {
+                    VideoPlayer(player: AVPlayer(url: url))
+                        .frame(maxHeight: vSizeClass == .regular ?
+                            height9(to16: proxy.size.width) : .infinity)
+                        .padding(15)
+                        .roundedGradientBackground()
+
+                    // Show video info in iPad or iPhone portrait orientation
+                    if vSizeClass == .regular {
+                        VStack(spacing: 16) {
+                            Text(episode.name)
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .foregroundColor(Color(UIColor.label))
+                            HStack(alignment: .top, spacing: 15) {
+                                Text(episode.released)
+                                Text(episode.domain)
+                                Text(String(episode.difficulty).capitalized)
+                            }
+                            Text(episode.description)
+                                .padding(.horizontal)
+                        }
+                        .foregroundColor(Color(UIColor.systemGray))
+                    }
+                    Spacer()
+                }
+            }
+        }
+        else {
+            EmptyView()
+        }
+    }
 }
 
 struct PlayView_Previews: PreviewProvider {
-  static var previews: some View {
-    let store = EpisodeStore()
-    Group {
-      PlayerView(episode: store.episodes[0])
+    static var previews: some View {
+        let store = EpisodeStore()
+        Group {
+            PlayerView(episode: store.episodes[0])
+//                .previewLayout(.sizeThatFits)
 
-      // landscape view shows only VideoPlayer
-      PlayerView(episode: store.episodes[0])
-        .previewLayout(.fixed(width: 896.0, height: 414.0))
+            // landscape view shows only VideoPlayer
+            PlayerView(episode: store.episodes[0])
+                .previewLayout(.fixed(width: 896.0, height: 414.0))
+        }
     }
-  }
 }
 
 extension View {
-  /// Set the background to app's gradient with rounded bottom corners
-  func roundedGradientBackground() -> some View {
-    self
-      .background(
-        LinearGradient(gradient: Gradient(colors: [Color.gradientDark, Color.gradientLight]),
-                       startPoint: .leading,
-                       endPoint: .trailing)
-      )
-      .cornerRadius(15, corners: [.bottomLeft, .bottomRight])
-  }
+    /// Set the background to app's gradient with rounded bottom corners
+    func roundedGradientBackground() -> some View {
+        self
+            .background(
+                LinearGradient(gradient: Gradient(colors: [Color.gradientDark, Color.gradientLight]),
+                               startPoint: .leading,
+                               endPoint: .trailing)
+            )
+            .cornerRadius(15, corners: [.bottomLeft, .bottomRight])
+    }
 }

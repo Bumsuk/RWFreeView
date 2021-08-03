@@ -33,14 +33,47 @@
 import SwiftUI
 
 struct ContentView: View {
+  @StateObject private var store = EpisodeStore()
+
   var body: some View {
-    Text("Hello, world!")
-      .padding()
+    NavigationView(content: {
+      List(store.episodes, id: \.name) { episode in
+        EpisodeView(episode: episode)
+      }
+      .navigationTitle("Videos")
+      //.navigationBarTitleDisplayMode(.inline)
+    })
   }
+  
+  init() {
+    let appearance = UINavigationBarAppearance()
+    appearance.backgroundColor = UIColor(named: "top-bkgd")
+    appearance.largeTitleTextAttributes = [
+      .foregroundColor: UIColor.white
+    ]
+    appearance.titleTextAttributes = [
+      .foregroundColor: UIColor.white
+    ]
+    
+    UINavigationBar.appearance().tintColor = .white
+    
+    UINavigationBar.appearance().standardAppearance = appearance
+    UINavigationBar.appearance().compactAppearance = appearance
+    UINavigationBar.appearance().scrollEdgeAppearance = appearance
+    
+    UISegmentedControl.appearance()
+      .selectedSegmentTintColor = UIColor(named: "list-bkgd")
+    
+  }
+  
 }
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView()
+    Group {
+      ContentView()
+      ContentView()
+        .preferredColorScheme(.dark)
+    }
   }
 }

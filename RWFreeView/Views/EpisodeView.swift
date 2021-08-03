@@ -43,7 +43,7 @@ struct EpisodeView: View {
           .font(.headline)
           .fontWeight(.bold)
           .foregroundColor(Color(UIColor.label))
-        AdaptingStack {
+        AdaptingStack { // V or H 스택을 반환
           Text(episode.released + "  ")
           Text(episode.domain + "  ")
           Text(String(episode.difficulty).capitalized)
@@ -60,7 +60,12 @@ struct EpisodeView: View {
 
 struct EpisodeView_Previews: PreviewProvider {
   static var previews: some View {
-    EpisodeView(episode: EpisodeStore().episodes[0])
-      .previewLayout(.sizeThatFits)
+    Group {
+      EpisodeView(episode: EpisodeStore().episodes[0])
+        .previewLayout(.sizeThatFits)
+      EpisodeView(episode: EpisodeStore().episodes[0])
+        .preferredColorScheme(.dark)
+        .previewLayout(.sizeThatFits)
+    }
   }
 }

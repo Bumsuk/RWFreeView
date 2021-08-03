@@ -33,7 +33,7 @@
 import SwiftUI
 
 /// HStack unless dynamic font size is XXL or larger
-struct AdaptingStack<Content>: View where Content: View {
+struct AdaptingStack<Content: View>: View {
   init(@ViewBuilder content: @escaping () -> Content) {
     self.content = content
   }
