@@ -38,34 +38,43 @@ struct ContentView: View {
   var body: some View {
     NavigationView(content: {
       List(store.episodes, id: \.name) { episode in
-        EpisodeView(episode: episode)
+        NavigationLink(destination: PlayerView(episode: episode)) {
+          EpisodeView(episode: episode)
+        }
       }
       .navigationTitle("Videos")
-      //.navigationBarTitleDisplayMode(.inline)
+      // .navigationBarTitleDisplayMode(.inline)
     })
   }
-  
+
   init() {
+//    UITableViewCell.appearance().selectedBackgroundView = {
+//      let view = UIView()
+//      view.backgroundColor = .blue
+//      return view
+//    }()
+
     let appearance = UINavigationBarAppearance()
     appearance.backgroundColor = UIColor(named: "top-bkgd")
     appearance.largeTitleTextAttributes = [
-      .foregroundColor: UIColor.white
+      .foregroundColor: UIColor.white,
+      // .font: UIFont.systemFont(ofSize: 10),
     ]
     appearance.titleTextAttributes = [
-      .foregroundColor: UIColor.white
+      .foregroundColor: UIColor.white,
     ]
-    
+    // 굳이 필요엄따. appearance.titlePositionAdjustment = .init(horizontal: 100, vertical: 0)
+
     UINavigationBar.appearance().tintColor = .white
-    
+
+    // 이 설정을 안하면 아무 의미없다.
     UINavigationBar.appearance().standardAppearance = appearance
     UINavigationBar.appearance().compactAppearance = appearance
     UINavigationBar.appearance().scrollEdgeAppearance = appearance
-    
+
     UISegmentedControl.appearance()
       .selectedSegmentTintColor = UIColor(named: "list-bkgd")
-    
   }
-  
 }
 
 struct ContentView_Previews: PreviewProvider {
