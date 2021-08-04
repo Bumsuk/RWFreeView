@@ -41,9 +41,22 @@ struct ContentView: View {
         NavigationLink(destination: PlayerView(episode: episode)) {
           EpisodeView(episode: episode)
         }
+        /*
+         Link(destination: URL(string: episode.linkURLString)!, label: {
+           EpisodeView(episode: episode)
+         })
+         */
       }
       .navigationTitle("Videos")
       // .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+         ToolbarItem {
+           Button(action: {}, label: {
+             Image(systemName: "line.horizontal.3.decrease.circle")
+              .accessibilityLabel(Text("Shows filter options @_@"))
+           })
+         }
+      }
     })
   }
 
@@ -75,8 +88,6 @@ struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     Group {
       ContentView()
-      ContentView()
-        .preferredColorScheme(.dark)
     }
   }
 }

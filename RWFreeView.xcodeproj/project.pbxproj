@@ -37,7 +37,7 @@
 		CD34211925A5771000817FD8 /* PlayButtonIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButtonIcon.swift; sourceTree = "<group>"; };
 		CD34211E25A6BCDC00817FD8 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		CD95699925A1663D000206E7 /* EpisodeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeStore.swift; sourceTree = "<group>"; };
-		CD9D2BFD25B00D5C0085F28C /* FilterOptionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterOptionsView.swift; sourceTree = "<group>"; };
+		CD9D2BFD25B00D5C0085F28C /* FilterOptionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = FilterOptionsView.swift; sourceTree = "<group>"; tabWidth = 4; };
 		CD9D2C0625B12EC10085F28C /* EpisodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeView.swift; sourceTree = "<group>"; };
 		CD9D2C0A25B12F8F0085F28C /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		CD9D2C0D25B130CB0085F28C /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };

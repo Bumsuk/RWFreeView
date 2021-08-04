@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "brown_profile_mohican.jpg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
