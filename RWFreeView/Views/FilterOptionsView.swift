@@ -94,12 +94,18 @@ struct FilterOptionsView: View {
                             .padding(.bottom)
                         }
                     }
+                                                            
                     VStack(alignment: .leading) {
                         Text("Difficulty")
                             .font(.title2)
                             .padding(.vertical)
                         AdaptingStack {
-                            Button("Beginner") { selectedB.toggle() }
+                            Button("Beginner") {
+                                withAnimation {
+                                    selectedB.toggle()
+                                }
+                                
+                            }
                                 .buttonStyle(FilterButtonStyle(selected: selectedB, width: nil))
                             Button("Intermediate") { selectedI.toggle() }
                                 .buttonStyle(FilterButtonStyle(selected: selectedI, width: nil))
@@ -139,6 +145,7 @@ struct FilterButtonStyle: ButtonStyle {
             .padding(7)
             .background(RoundedRectangle(cornerRadius: 10)
                             .fill(selected ? Color.greenButton : Color.grayButton))
+        
     }
 }
 

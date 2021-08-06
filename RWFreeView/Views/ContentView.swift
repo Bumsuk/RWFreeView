@@ -33,61 +33,68 @@
 import SwiftUI
 
 struct ContentView: View {
-  @StateObject private var store = EpisodeStore()
+    @StateObject private var store = EpisodeStore()
+    @State private var showFilters = false
 
-  var body: some View {
-    NavigationView(content: {
-      List(store.episodes, id: \.name) { episode in
-        NavigationLink(destination: PlayerView(episode: episode)) {
-          EpisodeView(episode: episode)
-        }
-        /*
-         Link(destination: URL(string: episode.linkURLString)!, label: {
-           EpisodeView(episode: episode)
-         })
-         */
-      }
-      .navigationTitle("Videos")
-      // .navigationBarTitleDisplayMode(.inline)
-      .toolbar {
-         ToolbarItem {
-           Button(action: {}, label: {
-             Image(systemName: "line.horizontal.3.decrease.circle")
-              .accessibilityLabel(Text("Shows filter options @_@"))
-           })
-         }
-      }
-    })
-  }
+    var body: some View {
+        NavigationView(content: {
+            List(store.episodes, id: \.name) { episode in
+                NavigationLink(destination: PlayerView(episode: episode)) {
+                    EpisodeView(episode: episode)
+                }
+                /*
+                 Link(destination: URL(string: episode.linkURLString)!, label: {
+                   EpisodeView(episode: episode)
+                 })
+                 */
+            }
+            .navigationTitle("Videos")
+            // .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem {
+                    Button(action: {
+                        showFilters.toggle()
+                    }, label: {
+                        Image(systemName: "line.horizontal.3.decrease.circle")
+                            .accessibilityLabel(Text("Shows filter options @_@"))
+                    })
+                    .sheet(isPresented: $showFilters) {} content: {
+                        FilterOptionsView()
+                    }
+                }
+            }
+        })
+    }
 
-  init() {
-    let appearance = UINavigationBarAppearance()
-    appearance.backgroundColor = UIColor(named: "top-bkgd")
-    appearance.largeTitleTextAttributes = [
-      .foregroundColor: UIColor.white,
-      // .font: UIFont.systemFont(ofSize: 10),
-    ]
-    appearance.titleTextAttributes = [
-      .foregroundColor: UIColor.white,
-    ]
-    // 굳이 필요엄따. appearance.titlePositionAdjustment = .init(horizontal: 100, vertical: 0)
+    init() {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = UIColor(named: "top-bkgd")
+        appearance.largeTitleTextAttributes = [
+            .foregroundColor: UIColor.white,
+            // .font: UIFont.systemFont(ofSize: 10),
+        ]
+        appearance.titleTextAttributes = [
+            .foregroundColor: UIColor.white,
+        ]
+        // 굳이 필요엄따. appearance.titlePositionAdjustment = .init(horizontal: 100, vertical: 0)
 
-    UINavigationBar.appearance().tintColor = .white // .yellow
+        UINavigationBar.appearance().tintColor = .white // .yellow
 
-    // 이 설정을 안하면 아무 의미없다.
-    UINavigationBar.appearance().standardAppearance = appearance
-    UINavigationBar.appearance().compactAppearance = appearance
-    UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        // 이 설정을 안하면 아무 의미없다.
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().compactAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
 
-    UISegmentedControl.appearance()
-      .selectedSegmentTintColor = UIColor(named: "list-bkgd")
-  }
+        UISegmentedControl.appearance()
+            .selectedSegmentTintColor = UIColor(named: "list-bkgd")
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    Group {
-      ContentView()
+    static var previews: some View {
+        Group {
+            ContentView()
+                .preferredColorScheme(.dark)
+        }
     }
-  }
 }
