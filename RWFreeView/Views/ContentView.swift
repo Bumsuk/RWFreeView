@@ -37,23 +37,17 @@ struct ContentView: View {
     @State private var showFilters = false
 
     var body: some View {
-        NavigationView(content: {
-            VStack {
+        NavigationView {
+            List {
                 HeaderView(count: store.episodes.count)
-                    
-                List(store.episodes, id: \.name) { episode in
+                
+                ForEach(store.episodes, id: \.name) { episode in
                     NavigationLink(destination: PlayerView(episode: episode)) {
                         EpisodeView(episode: episode)
                     }
-                    /*
-                     Link(destination: URL(string: episode.linkURLString)!, label: {
-                     EpisodeView(episode: episode)
-                     })
-                     */
                 }
             }
             .navigationTitle("Videos")
-            .navigationViewStyle(StackNavigationViewStyle())
             // .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem {
@@ -68,7 +62,8 @@ struct ContentView: View {
                     }
                 }
             }
-        })
+            .navigationViewStyle(StackNavigationViewStyle())
+        }
     }
 
     init() {
@@ -99,7 +94,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ContentView()
-                .preferredColorScheme(.dark)
+                .preferredColorScheme(.light)
         }
     }
 }

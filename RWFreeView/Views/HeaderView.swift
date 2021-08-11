@@ -54,12 +54,6 @@ struct HeaderView: View {
                     Button("20 results/page") { }
                     Button("30 results/page") { }
                     Button("No change") { }
-                    
-                    Menu("Copy") {
-                        Button("Copy", action: {})
-                        Button("Copy Formatted", action: {})
-                        Button("Copy Library Path", action: {})
-                    }
                 }
                 Spacer()
                 Picker("", selection: $sortOn) {
@@ -97,9 +91,8 @@ struct SearchField: View {
             TextField("", text: $queryTerm)
         }
         .padding(10)
-        .background(
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(Color.white.opacity(0.2)))
+        .background(RoundedRectangle(cornerRadius: 10)
+                        .foregroundColor(Color.white.opacity(0.2)))
     }
 }
 
