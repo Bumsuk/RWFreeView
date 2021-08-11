@@ -38,17 +38,22 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView(content: {
-            List(store.episodes, id: \.name) { episode in
-                NavigationLink(destination: PlayerView(episode: episode)) {
-                    EpisodeView(episode: episode)
+            VStack {
+                HeaderView(count: store.episodes.count)
+                    
+                List(store.episodes, id: \.name) { episode in
+                    NavigationLink(destination: PlayerView(episode: episode)) {
+                        EpisodeView(episode: episode)
+                    }
+                    /*
+                     Link(destination: URL(string: episode.linkURLString)!, label: {
+                     EpisodeView(episode: episode)
+                     })
+                     */
                 }
-                /*
-                 Link(destination: URL(string: episode.linkURLString)!, label: {
-                   EpisodeView(episode: episode)
-                 })
-                 */
             }
             .navigationTitle("Videos")
+            .navigationViewStyle(StackNavigationViewStyle())
             // .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem {
