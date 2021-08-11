@@ -35,10 +35,10 @@ import SwiftUI
 struct EpisodeView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
     @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
-    
+
     let episode: Episode
     var isIpad: Bool { horizontalSizeClass == .regular && verticalSizeClass == .regular }
-    
+
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
             PlayButtonIcon(width: 40, height: 40, radius: 6)
