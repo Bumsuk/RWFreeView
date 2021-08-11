@@ -42,13 +42,22 @@ struct ContentView: View {
                 HeaderView(count: store.episodes.count)
                 
                 ForEach(store.episodes, id: \.name) { episode in
-                    NavigationLink(destination: PlayerView(episode: episode)) {
+                    ZStack {
+                        NavigationLink(destination: PlayerView(episode: episode)) {
+                            EmptyView()
+                        }
+                        .buttonStyle(PlainButtonStyle())
+
                         EpisodeView(episode: episode)
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                    .padding(.bottom, 8)
+                    .padding([.leading, .trailing], 20)
+                    .background(Color.listBkgd)
                 }
             }
             .navigationTitle("Videos")
-            // .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem {
                     Button(action: {
@@ -62,8 +71,12 @@ struct ContentView: View {
                     }
                 }
             }
-            .navigationViewStyle(StackNavigationViewStyle())
+            
+            //PlayerView(episode: store.episodes[0])
+            //.navigationBarTitleDisplayMode(.inline)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
+
     }
 
     init() {
