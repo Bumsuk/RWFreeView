@@ -76,6 +76,20 @@ struct ContentView: View {
             //.navigationBarTitleDisplayMode(.inline)
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .onAppear(perform: {
+            let baseURLString = "https://api.raywenderlich.com/api/"
+            var urlComponents = URLComponents(
+                string: baseURLString + "contents/")!
+            urlComponents.queryItems = [
+                URLQueryItem(
+                    name: "filter[subscription_types][]", value: "free"),
+                URLQueryItem(
+                    name: "filter[content_types][]", value: "episode")
+            ]
+            urlComponents.url
+            urlComponents.url?.absoluteString
+
+        })
 
     }
 
